@@ -6,6 +6,7 @@ var eDisplayMoment = $('#currentDay');
 
 eDisplayMoment.text(nowMoment);
 
+var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 var workDayHours = ['8:00am','9:00am','10:00am','11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm'];
 
@@ -17,16 +18,42 @@ function createTimeBlocks() {
             '<div class="input-group-prepend">' +
             '<span class="input-group-text">' + workDayHours[i] + '</span>' +
             '</div>' +
-            '<input type="text" class="form-control" id="' + workDayHours[i] + '">' +
+            '<input type="text" class="form-control" id="userInput"' + workDayHours[i] + '">' +
             '<div class="input-group-append">' +
-            '<button class="btn btn-primary" data-time="' + workDayHours[i] + '"><i class="fa fa-save"></i></button>' +
+            '<button class="btn btn-primary" id="saveButton" data-time="' + workDayHours[i] + '"><i class="fa fa-save"></i></button>' +
             '</div>' +
             '</div>';
         blocks += hourBlocks;
     }
     $('#time-blocks').append(blocks);
-}
+    
+    $("#saveButton").on("click", function() {
 
+        var userTask = $("#userInput").val();
+        alert(userTask);
+
+        savedTasks.push(userTask);
+
+        // localStorage.setItem("tasks", JSONstringify(savedTasks));
+
+    });
+}
+// function saveTasks() {
+
+    // $("#saveButton").on("click", function() {
+
+    //     var userTask = $("#userInput").val();
+    //     alert(userTask);
+
+    //     savedTasks.push(userTask);
+
+    //     // localStorage.setItem("tasks", JSONstringify(savedTasks));
+
+    // });
+// }
+console.log(savedTasks);
+
+// saveTasks();
 createTimeBlocks();
 });
 
