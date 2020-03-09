@@ -12,6 +12,16 @@ body {
     border-left: 1px solid black;
     padding: 10px;
   }
+
+  .current{
+    background-color: goldenrod;
+  }
+  .past {
+    background-color: maroon;
+  }
+  .future {
+    background-color: midnightblue;
+  }
   
   .jumbotron {
     text-align: center;
