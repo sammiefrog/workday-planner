@@ -12,17 +12,17 @@ body {
     border-left: 1px solid black;
     padding: 10px;
   }
-
+/* 
   .current{
-    background-color: goldenrod;
+    background-color: goldenrod !important;
   }
   .past {
-    background-color: maroon;
+    background-color: maroon !important;
   }
   .future {
-    background-color: midnightblue;
+    background-color: midnightblue !important;
   }
-  
+   */
   .jumbotron {
     text-align: center;
     background-color: transparent;
