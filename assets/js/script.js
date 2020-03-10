@@ -26,10 +26,10 @@ function createTimeBlocks() {
         var hourBlocks = "" +
             '<div class="input-group mb-3">' +
             '<div class="input-group-prepend">' +
-            '<span class="input-group-text">' + workDayHours[i]+ ":00"
+            '<span class="input-group-text">' + workDayHours[i]+ ":00" +
              '</span>' +
             '</div>' +
-            '<input type="text" class="form-control" id="' + workDayHours[i] + '">' +
+            '<input type="text" class="form-control" value="" id="' + workDayHours[i] + '">' +
             '<div class="input-group-append">' +
             '<button class="btn btn-primary saveButton" data-time="' + workDayHours[i] + '"><i class="fa fa-save"></i></button>' +
             '</div>' +
@@ -40,14 +40,24 @@ function createTimeBlocks() {
 
 
 //this click is used for either method of showing rows^
-    $(".saveButton").on("click", function(event) {
-        var timeSlot = event.currentTarget.getAttribute('data-time');
-        var userTask = $('#userInput').val();
+    $('.saveButton').on("click", function() {
+        // var timeSlot = event.currentTarget.getAttribute('data-time');
+        var timeSlot = $(this).attr('data-time');
+        var userTask = $(':input').val();
+        // var userTask1 = $('#8').val();
+        // var userTask2 = $('#9').val();
+        // var userTask3 = $('#10').val();
+        // var userTask4 = $('#11').val();
+        // var userTask = $(input).val();
         // var userTask = $('INPUT').val();
         console.log(timeSlot);
         console.log(userTask);
-        savedTasks.push(userTask);
-        // savedTasks[timeSlot] = userTask;
+        // console.log(userTask1);
+        // console.log(userTask2);
+        // console.log(userTask3);
+        // console.log(userTask4);
+        // savedTasks.push(userTask);
+        savedTasks[timeSlot] = userTask;
         localStorage.setItem("tasks", JSON.stringify(savedTasks));
         localStorage.getItem("tasks");
 
@@ -55,8 +65,6 @@ function createTimeBlocks() {
 
 //showing up green at 8am....
 for (i = 0; i < workDayHours.length; i++) {
-    // var workHours = parseInt(workDayHours[i]);
-    // var inputField = $('# + workDayHours[i]');
 
     if (currentHour === workDayHours[i]) {
         $("#" + workDayHours[i]).addClass('present');

@@ -53,7 +53,7 @@ body {
   }
   
   .past {
-    background-color: #d3d3d3;
+    background-color: maroon;
     color: white;
   }
   
@@ -63,7 +63,7 @@ body {
   }
   
   .future {
-    background-color: #77dd77;
+    background-color: midnightblue;
     color: white;
   }
   
