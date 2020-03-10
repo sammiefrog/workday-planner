@@ -1,7 +1,7 @@
 $(document).ready(function() {
 //dont touch this it works
 var nowMoment = moment().format('MMMM Do YYYY, h:mm:ss a');
-var currentHour = [moment().hour()];
+var currentHour = moment().hour();
 var eDisplayMoment = $('#currentDay');
 eDisplayMoment.text(nowMoment);
 
@@ -26,9 +26,16 @@ function createTimeBlocks() {
         var hourBlocks = "" +
             '<div class="input-group mb-3">' +
             '<div class="input-group-prepend">' +
-            '<span class="input-group-text">' + workDayHours[i] + '</span>' +
+            '<span class="input-group-text">' + workDayHours[i]+ ":00"
+            if (workDayHours[i] < 12) {
+               + " AM" +
+            }
+            else if (workDayHour >= 12) {
+               + " PM" +
+            }
+             '</span>' +
             '</div>' +
-            '<input type="text" class="form-control" id="userInput"' + workDayHours[i] + '">' +
+            '<input type="text" class="form-control" id="' + workDayHours[i] + '">' +
             '<div class="input-group-append">' +
             '<button class="btn btn-primary saveButton" data-time="' + workDayHours[i] + '"><i class="fa fa-save"></i></button>' +
             '</div>' +
@@ -36,22 +43,7 @@ function createTimeBlocks() {
         blocks += hourBlocks;
     }
     timeBlocks.append(blocks);
-//second way
-    // $.each(currentTime, function(key, value) {
-    
-    //     var hourBlocks = "" +
-    //     '<div class="input-group mb-3">' +
-    //     '<div class="input-group-prepend">' +
-    //     '<span class="input-group-text">' + value + '</span>' +
-    //     '</div>' +
-    //     '<input type="text" class="form-control inputVal" id="color userInput" value="">' +
-    //     '<div class="input-group-append">' +
-    //     '<button class="btn btn-primary saveButton" value="i" data-time="' + key + '"><i class="fa fa-save"></i></button>' +
-    //     '</div>' +
-    //     '</div>';
-    // blocks += hourBlocks;
-    // });
-    // timeBlocks.append(blocks);
+
 
 //this click is used for either method of showing rows^
     $(".saveButton").on("click", function(event) {
@@ -70,20 +62,50 @@ function createTimeBlocks() {
 //showing up green at 8am....
 for (i = 0; i < workDayHours.length; i++) {
     // var workHours = parseInt(workDayHours[i]);
-    var inputField = $('#userInput');
-    // var time = parseInt(nowTime);
-    if (currentHour === workDayHours) {
-        inputField.addClass('present');
+    // var inputField = $('# + workDayHours[i]');
+
+    if (currentHour === workDayHours[i]) {
+        $("#" + workDayHours[i]).addClass('present');
     }
-    if (currentHour > workDayHours) {
-        inputField.addClass('past');
+    if (currentHour > workDayHours[i]) {
+        $("#" + workDayHours[i]).addClass('past');
     }
-    if (currentHour < workDayHours) {
-        inputField.addClass('future');
+    if (currentHour < workDayHours[i]) {
+        $("#" + workDayHours[i]).addClass('future');
     }
     
 }
 
+}
+console.log(currentHour);
+createTimeBlocks();
+
+//don't delete this dummy
+});
+
+//pseudocode
+//create an input line for each hour of the work day
+//prepend the hour to each input
+//append a save button to each input
+//on click of the save button save it to localStorage
+//also - keep it displayed there when it is saved
+//second way
+    // $.each(currentTime, function(key, value) {
+    
+    //     var hourBlocks = "" +
+    //     '<div class="input-group mb-3">' +
+    //     '<div class="input-group-prepend">' +
+    //     '<span class="input-group-text">' + value + '</span>' +
+    //     '</div>' +
+    //     '<input type="text" class="form-control inputVal" id="color userInput" value="">' +
+    //     '<div class="input-group-append">' +
+    //     '<button class="btn btn-primary saveButton" value="i" data-time="' + key + '"><i class="fa fa-save"></i></button>' +
+    //     '</div>' +
+    //     '</div>';
+    // blocks += hourBlocks;
+    // });
+    // timeBlocks.append(blocks);
+    
 
 //third way via josh - doesnt work on my format?
 // Object.keys(savedTasks).forEach(function(time) {
@@ -112,16 +134,3 @@ for (i = 0; i < workDayHours.length; i++) {
 
 
 // console.log(savedTasks);
-}
-console.log(currentHour);
-createTimeBlocks();
-
-//don't delete this dummy
-});
-
-//pseudocode
-//create an input line for each hour of the work day
-//prepend the hour to each input
-//append a save button to each input
-//on click of the save button save it to localStorage
-//also - keep it displayed there when it is saved
