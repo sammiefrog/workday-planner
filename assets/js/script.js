@@ -27,12 +27,6 @@ function createTimeBlocks() {
             '<div class="input-group mb-3">' +
             '<div class="input-group-prepend">' +
             '<span class="input-group-text">' + workDayHours[i]+ ":00"
-            if (workDayHours[i] < 12) {
-               + " AM" +
-            }
-            else if (workDayHour >= 12) {
-               + " PM" +
-            }
              '</span>' +
             '</div>' +
             '<input type="text" class="form-control" id="' + workDayHours[i] + '">' +
