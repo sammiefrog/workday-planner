@@ -9,11 +9,11 @@ eDisplayMoment.text(nowMoment);
 var timeBlocks = $('#time-blocks');
 
 //currently in use
-// var userTask;
-// var timeSlot;
+var userTask;
+var timeSlot;
 var taskData = {};
 
-var savedTasks = JSON.parse(localStorage.getItem("saves")) || taskData;
+const savedTasks = JSON.parse(localStorage.getItem("saves")) || taskData;
 
 console.log(savedTasks);
 
@@ -31,13 +31,23 @@ function createTimeBlocks() {
             '<span class="input-group-text">' + workDayHours[i]+ ":00" +
              '</span>' +
             '</div>' +
-            '<input type="text" class="form-control" id="' + workDayHours[i] + '"/>' +
+            '<input type="text" class="form-control" id="' + workDayHours[i] + '" savedTasks[workDayHours[i]] />' +
             '<div class="input-group-append">' +
             '<button class="btn btn-success saveButton" data-time="' + workDayHours[i] + '"><i class="fa fa-save"></i></button>' +
             '</div>' +
             '</div>';
-        blocks += hourBlocks;
-            $('#' + workDayHours[i]).text(savedTasks);
+            if (savedTasks){
+                $('#' + workDayHours[i]).val(savedTasks);
+                blocks += hourBlocks;
+            }
+            else if(!savedTasks) {
+                blocks += hourBlocks;
+
+            }
+
+        
+
+            
     }
     timeBlocks.append(blocks);
 
