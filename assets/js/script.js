@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 //dont touch this it works
 var nowMoment = moment().format('MMMM Do YYYY, h:mm:ss a');
 var currentHour = moment().hour();
@@ -9,17 +10,28 @@ eDisplayMoment.text(nowMoment);
 var timeBlocks = $('#time-blocks');
 
 //currently in use
-var userTask;
 var timeSlot;
-var taskData = {};
 
-const savedTasks = JSON.parse(localStorage.getItem("saves")) || taskData;
+var savedTasks = localStorage.getItem(timeSlot);
+// var savedTask9 = localStorage.getItem(9);
+// var savedTask10 = localStorage.getItem(10);
+// var savedTask11 = localStorage.getItem(11);
+// var savedTask12 = localStorage.getItem(12);
+// var savedTask13 = localStorage.getItem(13);
+// var savedTask14 = localStorage.getItem(14);
+// var savedTask15 = localStorage.getItem(15);
+// var savedTask16 = localStorage.getItem(16);
 
+// if(savedTasks) {
+//     savedTasks = JSON.parse(savedTasks);
+// }
+// else {
+//     savedTasks = {}; 
+// };
 console.log(savedTasks);
 
 var workDayHours = [8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-//i use this for the second way of showing my rows
 
 function createTimeBlocks() {
     var blocks = "";
@@ -31,42 +43,43 @@ function createTimeBlocks() {
             '<span class="input-group-text">' + workDayHours[i]+ ":00" +
              '</span>' +
             '</div>' +
-            '<input type="text" class="form-control" id="' + workDayHours[i] + '" savedTasks[workDayHours[i]] />' +
+            '<input type="text" class="form-control" id="' + workDayHours[i] + '"/>' +
             '<div class="input-group-append">' +
             '<button class="btn btn-success saveButton" data-time="' + workDayHours[i] + '"><i class="fa fa-save"></i></button>' +
             '</div>' +
             '</div>';
-            if (savedTasks){
-                $('#' + workDayHours[i]).val(savedTasks);
-                blocks += hourBlocks;
-            }
-            else if(!savedTasks) {
-                blocks += hourBlocks;
 
-            }
-
-        
-
-            
+        blocks += hourBlocks;
+        // if (savedTasks !== null) {
+        //     $("#" + workDayHours[i]).text(savedTasks);
+        //   }
     }
     timeBlocks.append(blocks);
 
-    
 
 
-//this click is used for either method of showing rows^
+//this click saved the user input and the data-time
     $('.saveButton').on("click", function() {
 
         var timeSlot = $(this).attr('data-time');
         var userTask = $(`#${timeSlot}`).val();
 
-        savedTasks[timeSlot] = userTask;
+        localStorage.setItem(timeSlot, userTask);
+        console.log(timeSlot)
+        // var savedTasks = localStorage.getItem(timeSlot);
 
-        localStorage.setItem("saves", JSON.stringify(savedTasks));
-
-        console.log(localStorage);
-
+        // console.log(savedTasks);
+        // appendNewValue();
+        // var savedTasks = JSON.parse(localStorage.getItem(timeSlot));
+        // localStorage.setItem("saves", JSON.stringify(savedTasks));
+        
     });
+
+    // function appendNewValue(timeSlot, userTask){
+    //     savedTasks[timeSlot] = userTask;
+    //     localStorage.setItem("timeSlot", JSON.stringify(savedTasks));
+
+    // }
 
 
 //colorizing the input fields!!!!!
@@ -87,11 +100,8 @@ for (i = 0; i < workDayHours.length; i++) {
 }
 console.log(currentHour);
 
+
 createTimeBlocks();
 
 //don't delete this dummy
 });
-
-
-        // savedTasks[timeSlot] = userTask;
-        // localStorage.setItem("tasks", JSON.stringify(savedTasks));
