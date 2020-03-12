@@ -14,6 +14,12 @@ var timeBlocks = $('#time-blocks');
 
 //currently in use
 // var savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+var userTask;
+var timeSlot;
+const savedTasks = localStorage.getItem(timeSlot) || {};
+
+// var savedTasks = localStorage.getItem(timeSlot);
+
 var workDayHours = [8, 9, 10, 11, 12, 13, 14, 15, 16];
 
 //i use this for the second way of showing my rows
@@ -29,14 +35,19 @@ function createTimeBlocks() {
             '<span class="input-group-text">' + workDayHours[i]+ ":00" +
              '</span>' +
             '</div>' +
-            '<input type="text" class="form-control" value="" id="' + workDayHours[i] + '">' +
+            '<input type="text" class="form-control" id="' + workDayHours[i] + '" value=""/>' +
             '<div class="input-group-append">' +
             '<button class="btn btn-success saveButton" data-time="' + workDayHours[i] + '"><i class="fa fa-save"></i></button>' +
             '</div>' +
             '</div>';
         blocks += hourBlocks;
+        for (var j = 0; j < workDayHours.length; j++) {
+            $('#' + workDayHours[i]).text(timeSlot);
+        }
     }
     timeBlocks.append(blocks);
+
+    
 
 
 //this click is used for either method of showing rows^
@@ -44,8 +55,11 @@ function createTimeBlocks() {
 
         var timeSlot = $(this).attr('data-time');
         var userTask = $(`#${timeSlot}`).val();
+
+
         localStorage.setItem(timeSlot, userTask);
-        
+
+        console.log(localStorage);
         // var savedTask = {
         //     timeSlot : userTask
         // }
@@ -78,9 +92,6 @@ function createTimeBlocks() {
     });
 
 
-
-    
-
 //colorizing the input fields!!!!!
 for (i = 0; i < workDayHours.length; i++) {
 
@@ -98,6 +109,7 @@ for (i = 0; i < workDayHours.length; i++) {
 
 }
 console.log(currentHour);
+
 createTimeBlocks();
 
 //don't delete this dummy
